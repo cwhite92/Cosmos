@@ -3,6 +3,9 @@ function Player() {
     this.sprite = new Image();
     this.sprite.src = 'http://i.imgur.com/h3flWtQ.png';
 
+    // This array holds all of the bullets fired by the player
+    this.bullets = [];
+
     // Track the players position
     this.x = window.width / 2;
     this.y = window.height / 2;
@@ -39,11 +42,6 @@ Player.prototype.update = function() {
         this.xv += 0.75;
     }
 
-    if(keyState[18]) {
-        console.log('x: ' + this.xv + '           y: ' + this.yv);
-
-    }
-
     // Check if the player has gone out of bounds and move them back if they have
     if(this.x < this.sprite.width / 2) this.x = this.sprite.width / 2;
     if(this.x > window.width - this.sprite.width) this.x = window.width - this.sprite.width;
@@ -52,6 +50,18 @@ Player.prototype.update = function() {
     
     // Rotate the player to face the mouse cursor (- 2.35 because the sprite starts out 135 degrees off center)
     this.rotation = Math.atan2(this.y - mouseState.y, this.x - mouseState.x) - 2.35;
+
+    // If left mouse is pressed fire a bullet, settings its co-ordinates and direction to the same as the player
+    if(mouseState.left) {
+        console.log(this.rotation);
+        this.bullets.push(new Bullet(this.x, this.y, this.rotation));
+    }
+
+    // Update and draw bullets
+    for(var i = 0; i < this.bullets.length; i++) {
+        this.bullets[i].update();
+        this.bullets[i].draw();
+    }
 }
 
 Player.prototype.draw = function() {

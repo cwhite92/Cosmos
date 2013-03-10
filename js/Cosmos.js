@@ -12,6 +12,7 @@ function Cosmos() {
     this.canvas.height = window.height;
     this.canvas.width = window.width;
 
+    // Game objects
     this.background = new Background();
     this.player = new Player();
 

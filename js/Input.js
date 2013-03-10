@@ -21,8 +21,29 @@ var mouseState = {
 };
 
 document.onmousemove = function(e) {
-    mouseState.x = e.x;
-    mouseState.y = e.y;
+    mouseState.x = e.clientX;
+    mouseState.y = e.clientY;
+    console.log(mouseState.x);
+}
 
+document.onmousedown = function(e) {
+    switch(e.button) {
+        case 0:
+            mouseState.left = true;
+            break;
+        case 2:
+            mouseState.right = true;
+            break;
+    }
+}
 
+document.onmouseup = function(e) {
+    switch(e.button) {
+        case 0:
+            mouseState.left = false;
+            break;
+        case 2:
+            mouseState.right = false;
+            break;
+    }
 }
