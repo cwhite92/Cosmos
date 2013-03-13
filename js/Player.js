@@ -13,7 +13,7 @@ function Player() {
     // Properties that control the players position and speed
     this.xv = 0;
     this.yv = 0;
-    this.friction = 1;
+    this.friction = 0.9;
 
     // The player sprite rotation, used to face it towards the cursor
     this.rotation = 0;
@@ -21,8 +21,8 @@ function Player() {
 
 Player.prototype.update = function() {
     // Gradually make the players velocity 0
-    this.xv *= 0.9;
-    this.yv *= 0.9;
+    this.xv *= this.friction;
+    this.yv *= this.friction;
 
     // Update player position based on velocity
     this.x += this.xv;
