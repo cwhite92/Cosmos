@@ -29,8 +29,8 @@ Cosmos.prototype.tick = function() {
     window.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     // Update things
-    this.background.update();
     this.player.update();
+    this.background.update(this.player.xv, this.player.yv);
 
     // Then draw them
     this.background.draw();

@@ -23,7 +23,6 @@ var mouseState = {
 document.onmousemove = function(e) {
     mouseState.x = e.clientX;
     mouseState.y = e.clientY;
-    console.log(mouseState.x);
 }
 
 document.onmousedown = function(e) {

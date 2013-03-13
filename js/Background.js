@@ -14,7 +14,7 @@ function Background() {
     }
 }
 
-Background.prototype.update = function() {
+Background.prototype.update = function(playerXv, playerYv) {
     // Remove any stars that are off screen
     for(var i = 0; i < this.stars.length; i++) {
         if(this.stars[i].x < 0) {
@@ -31,6 +31,8 @@ Background.prototype.update = function() {
     // Move all the stars relative to their size so we get a parallax effect
     for(var i = 0; i < this.stars.length; i++) {
         this.stars[i].x -= this.stars[i].radius;
+        this.stars[i].x -= this.stars[i].radius * playerXv / 10;
+        this.stars[i].y -= this.stars[i].radius * playerYv / 10;
     }
 }
 
