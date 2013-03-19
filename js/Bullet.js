@@ -3,8 +3,8 @@ function Bullet(x, y, rotation) {
     this.x = x;
     this.y = y;
 
-    // The direction the bullet is moving
-    this.direction = -rotation + 2.35;
+    // Introduce some randomness into the bullets direction to simulate spread
+    this.direction = (-rotation + 2.35) + (Math.random() * 0.2);
 
     // The speed the bullet is moving
     this.speed = 10;

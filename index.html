@@ -4,9 +4,12 @@
         <title>Cosmos</title>
 
         <link type="text/css" rel="stylesheet" href="style.css">
+        <link type='text/css' rel="stylesheet" href="http://fonts.googleapis.com/css?family=Tauri">
 
+        <script type="text/javascript" src="js/Utils.js"></script>
         <script type="text/javascript" src="js/Input.js"></script>
         <script type="text/javascript" src="js/Background.js"></script>
+        <script type="text/javascript" src="js/Hud.js"></script>
         <script type="text/javascript" src="js/Bullet.js"></script>
         <script type="text/javascript" src="js/Player.js"></script>
         <script type="text/javascript" src="js/Enemy.js"></script>
@@ -14,12 +17,29 @@
 
         <script type="text/javascript">
             window.onload = function() {
-                // Lift off
-                var cosmos = new Cosmos();
+                // Preload images
+                preload(['img/enemy-green.png', 'img/enemy-orange.png', 'img/enemy-red.png', 'img/health.png', 'img/player.png', 'img/wave.png']);
             }
         </script>
     </head>
-    <body>
+    <body oncontextmenu="return false;">
         <canvas id="cosmos"></canvas>
+
+        <div id="gameStart">
+            <h1>Cosmos</h1>
+            <img src="img/controls.png" class="controls" alt="controls" />
+            <p>The aim of the game is to survive as long as possible. Enemies will come in waves, each wave being harder to survive than the last. It's your mission to kill as many enemies as you can.</p>
+            <p onclick="start();" id="start">I'm ready!</p>
+        </div>
+
+        <div id="gameOver">
+            <h2>Game over :(</h2>
+            <p>You survived to wave <span id="wave"></span>.</p>
+            <p onclick="restart();" id="restart">Click here to play again!</p>
+        </div>
+
+        <audio id="background" autoplay="autoplay" loop="loop">
+            <source src="audio/ParagonX9 - Chaoz Fantasy.mp3">
+        </audio>
     </body>
 </html>

@@ -1,7 +1,7 @@
 function Player() {
     // Create the player sprite
     this.sprite = new Image();
-    this.sprite.src = 'http://i.imgur.com/h3flWtQ.png';
+    this.sprite.src = 'img/player.png';
 
     // This array holds all of the bullets fired by the player
     this.bullets = [];
@@ -17,6 +17,12 @@ function Player() {
 
     // The player sprite rotation, used to face it towards the cursor
     this.rotation = 0;
+
+    // The power of the players bullets
+    this.power = 32;
+
+    // The HP of the player
+    this.health = 100;
 }
 
 Player.prototype.update = function() {
@@ -41,7 +47,7 @@ Player.prototype.update = function() {
     if(keyState[68]) {
         this.xv += 0.75;
     }
-    
+
     // Check if the player has gone out of bounds and move them back if they have
     if(this.x < this.sprite.width / 2) this.x = this.sprite.width / 2;
     if(this.x > window.width - this.sprite.width) this.x = window.width - this.sprite.width;
@@ -54,6 +60,14 @@ Player.prototype.update = function() {
     // If left mouse is pressed fire a bullet, setting its co-ordinates and direction to the same as the player
     if(mouseState.left) {
         this.bullets.push(new Bullet(this.x, this.y, this.rotation));
+    }
+
+    // Remove any bullets that are out of the game area
+    for(var i = 0; i < this.bullets.length; i++) {
+        if(this.bullets[i].x < 0 || this.bullets[i].x > window.width ||
+           this.bullets[i].y < 0 || this.bullets[i].y > window.height) {
+            this.bullets.splice(i, 1);
+        }
     }
 
     // Update and draw bullets
